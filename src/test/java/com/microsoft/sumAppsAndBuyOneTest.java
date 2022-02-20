@@ -105,7 +105,7 @@ public class sumAppsAndBuyOneTest {
 
     @Test(priority = 4)
     public void comparePricesBeforeAndAfterAddToCart(){
-        double priceBeforeAddToCart = shopPage.addToCarAnyItem();
+        double priceBeforeAddToCart = shopPage.addToCarFirstItem();
         cartPage = new CartPage(driver);
         int itemsInCar = navigatorMenu.countItemFromShoppingCar();
         Assert.assertTrue(itemsInCar > 0, "You are not in the Shopping Cart Page or there are not items in the car");

@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ShopPage extends Base {
@@ -86,14 +87,14 @@ public class ShopPage extends Base {
         double sumPrices = 0;
 
         if(printTitles){
-            for (int i = 0; i < itemsForSale.size(); i++) {
-                String [] titleAndPrice = itemsForSale.get(i).findElement(By.className("c-channel-placement-content")).getText().split("\n");
+            for (WebElement element : itemsForSale) {
+                String[] titleAndPrice = element.findElement(By.className("c-channel-placement-content")).getText().split("\n");
                 sumPrices += getPriceAndPrintTittle(titleAndPrice);
                 totalTitles++;
             }
         }else {
-            for (int i = 0; i < itemsForSale.size(); i++) {
-                String [] titleAndPrice = itemsForSale.get(i).findElement(By.className("c-channel-placement-content")).getText().split("\n");
+            for (WebElement element : itemsForSale) {
+                String[] titleAndPrice = element.findElement(By.className("c-channel-placement-content")).getText().split("\n");
                 sumPrices += getPrice(titleAndPrice);
             }
         }
@@ -123,12 +124,10 @@ public class ShopPage extends Base {
             return Double.parseDouble(price);
         }else if(titleAndPrice[titleAndPrice.length -1].contains("+")){
             List<String> shortTittleAndPrice = new ArrayList<>();
-            for (int i = 0; i < titleAndPrice.length; i++) {
-                shortTittleAndPrice.add(titleAndPrice[i]);
-            }
+            Collections.addAll(shortTittleAndPrice, titleAndPrice);
             int indexToRemove = shortTittleAndPrice.size() -1;
             shortTittleAndPrice.remove(indexToRemove);
-            printTitle(shortTittleAndPrice.toArray(new String[shortTittleAndPrice.size()]));
+            printTitle(shortTittleAndPrice.toArray(new String[0]));
             return 0;
         }
 
@@ -140,11 +139,11 @@ public class ShopPage extends Base {
 
         if(titleAndPrice[0].contains("Ahorra")){
             for (int i = 1; i < titleAndPrice.length -4; i++) {
-                title.append(titleAndPrice[i]+" ");
+                title.append(titleAndPrice[i]).append(" ");
             }
         }else {
             for (int i = 0; i < titleAndPrice.length -1; i++) {
-                title.append(titleAndPrice[i]+" ");
+                title.append(titleAndPrice[i]).append(" ");
             }
         }
         System.out.println("* "+title.substring(0, title.length()-1));
@@ -167,7 +166,7 @@ public class ShopPage extends Base {
     }
 
 
-    public double addToCarAnyItem() {
+    public double addToCarFirstItem() {
         WebElement itemForSale = itemsForSale.get(0);
         String [] titleAndPrice = itemForSale.findElement(By.className("c-channel-placement-content")).getText().split("\n");
         double pricesItem = getPrice(titleAndPrice);

@@ -25,24 +25,8 @@ public class Base {
         return driver;
     }
 
-    public WebElement findElement(By locator){
-        return driver.findElement(locator);
-    }
-
-    public List<WebElement> findElements(By locator){
-        return driver.findElements(locator);
-    }
-
     public String getText(WebElement element){
         return element.getText();
-    }
-
-    public String getText(By locator){
-        return findElement(locator).getText();
-    }
-
-    public void type(String inputText, WebElement element){
-        element.sendKeys(inputText);
     }
 
     public void click(WebElement element){
@@ -59,10 +43,6 @@ public class Base {
 
     public void openURL(String url){
         driver.get(url);
-    }
-
-    public String getURL(){
-        return driver.getCurrentUrl();
     }
 
     public void waitUntilElementIsVisible(WebElement element, int maxTimeWait){

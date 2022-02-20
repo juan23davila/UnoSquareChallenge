@@ -17,6 +17,10 @@ public class ComponentsManager{
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * get main or navigator menu
+     * @return Navigator menu
+     */
     public NavigatorMenu getNavigatorMenu(){
         return new NavigatorMenu(driver, navigatorMenuSectionElement);
     }
