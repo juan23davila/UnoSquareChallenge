@@ -1,0 +1,10 @@
+{
+  "dataToTest": [
+    {
+      "url": "https://www.microsoft.com/es-mx/",
+      "itemToSearch": "xbox",
+      "pagesToSum": "3",
+      "messageToAssert": "Tu carro está vacío."
+    }
+  ]
+}

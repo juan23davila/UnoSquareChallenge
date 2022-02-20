@@ -1,0 +1,23 @@
+package com.microsoft.components;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class ComponentsManager{
+
+    WebDriver driver;
+
+    @FindBy(id = "headerRegion")
+    WebElement navigatorMenuSectionElement;
+
+    public ComponentsManager(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public NavigatorMenu getNavigatorMenu(){
+        return new NavigatorMenu(driver, navigatorMenuSectionElement);
+    }
+}
